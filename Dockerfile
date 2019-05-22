@@ -54,7 +54,7 @@ RUN curl -o grav-admin.zip -SL https://getgrav.org/download/core/grav-admin/${GR
 USER root
 
 # Copy init scripts
-# COPY docker-entrypoint.sh /entrypoint.sh
-# ENTRYPOINT ["/entrypoint.sh"]
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["apache2-foreground"]
