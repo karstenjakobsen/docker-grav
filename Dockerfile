@@ -40,14 +40,12 @@ RUN pecl install apcu \
 RUN chown www-data:www-data /var/www
 USER www-data
 
-# Define Grav version and expected SHA1 signature
-ENV GRAV_VERSION 1.5.5
-ENV GRAV_SHA1 af0433facdae1afeb1d973a66db2315c5022b10d
+# Define Grav version
+ENV GRAV_VERSION 1.6.9
 
 # Install grav
 WORKDIR /var/www
-RUN curl -o grav-admin.zip -SL https://getgrav.org/download/core/grav-admin/${GRAV_VERSION} && \
-    echo "$GRAV_SHA1 grav-admin.zip" | sha1sum -c - && \
+RUN curl -o grav-admin.zip -SL https://getgrav.org/download/core/grav-admin/${GRAV_VERSION} && \    
     unzip grav-admin.zip && \
     mv -T /var/www/grav-admin /var/www/html && \
     rm grav-admin.zip
@@ -57,6 +55,6 @@ USER root
 
 # Copy init scripts
 # COPY docker-entrypoint.sh /entrypoint.sh
-
 # ENTRYPOINT ["/entrypoint.sh"]
-# CMD ["apache2-foreground"]
+
+CMD ["apache2-foreground"]
